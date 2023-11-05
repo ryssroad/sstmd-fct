@@ -4,10 +4,11 @@ import { RoundedBox } from "./RoundedBox"
 
 export const OpenSourceMemo = () => (
   <RoundedBox>
-    <b>Would you like to build similar app?</b> Feel free to browse the&nbsp;
-    <Link href="https://github.com/mateuszsokola/eth-faucet" passHref>
+    supported by roadz@systemd.run<br></br>
+    <b>Got any extra Sepolia ETH to burn? send it back to this faucet</b><br></br>
+    <Link href="https://sepolia.etherscan.io/address/0xe02e9599e8cc7ad0fd27f50e4e13c21539c140a2" passHref>
       <MuiLink target="_blank" rel="noopener referrer">
-        source code on Github
+      0xe02e9599e8cc7ad0fd27f50e4e13c21539c140a2
       </MuiLink>
     </Link>
   </RoundedBox>

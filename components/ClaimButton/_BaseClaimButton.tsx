@@ -1,6 +1,7 @@
 import { Button } from "@mui/material"
+import { ethers } from "ethers"
 import LoadingButton from "@mui/lab/LoadingButton"
-import { Goerli, useEthers } from "@usedapp/core"
+import { Sepolia, useEthers } from "@usedapp/core"
 import { isNil } from "lodash"
 import Link from "next/link"
 import { hasMetamask } from "../../hooks/hasMetamask"
@@ -28,8 +29,17 @@ export const BaseClaimButton = ({ onSuccess, onError, retrieveCaptcha }: BaseCla
       const nonce = await retrieveNonce()
       const message = messageTemplate(nonce)
 
-      const signer = library.getSigner()
-      const signature = await signer.signMessage(message)
+      let signature: string 
+      if (library instanceof ethers.providers.JsonRpcProvider) {
+        const signer = library.getSigner()
+        signature = await signer.signMessage(message)
+        // остальной код
+      } else {
+        throw new Error("Library is not an instance of JsonRpcProvider")
+      }
+
+      // const signer = library.getSigner()
+      // const signature = await signer.signMessage(message)
 
       await claimTokens(account as string, message, signature, captchaToken)
       onSuccess()
@@ -57,6 +67,7 @@ export const BaseClaimButton = ({ onSuccess, onError, retrieveCaptcha }: BaseCla
     return <LoadingButton variant="contained" loading fullWidth />
   }
 
+  if (chainId == Sepolia.chainId) {
   if (!account) {
     return (
       <Button variant="contained" onClick={() => activateBrowserWallet()} fullWidth>
@@ -64,18 +75,19 @@ export const BaseClaimButton = ({ onSuccess, onError, retrieveCaptcha }: BaseCla
       </Button>
     )
   }
+}
 
-  if (chainId !== Goerli.chainId) {
+  if (chainId !== Sepolia.chainId) {
     return (
-      <Button variant="contained" onClick={() => switchNetwork(Goerli.chainId)} fullWidth>
-        Switch to Görli network
+      <Button variant="contained" onClick={() => switchNetwork(Sepolia.chainId)} fullWidth>
+        Switch to Sepolia network
       </Button>
     )
   }
 
   return (
     <Button variant="contained" onClick={claimGorliEth} fullWidth>
-      Claim Görli ETH
+      Claim Sepolia ETH
     </Button>
   )
 }

@@ -57,6 +57,8 @@ const Home: NextPage = () => {
 
   const handleError = (error: string) => dispatch({ type: "error", error })
 
+  //const fcacc = "0xe02e9599e8Cc7ad0FD27f50e4E13C21539C140a2"
+  
   const renderAlert = useCallback(() => {
     switch (state.status) {
       case "success":
@@ -78,8 +80,9 @@ const Home: NextPage = () => {
         <span>Wallet balance</span>
         <span>{balance ? formatEther(balance) : <>&ndash;</>} ETH (testnet)</span>
       </Item>
+      <br></br>
       <Item>
-        <span>Claimable Görli ETH</span>
+        <span>Claimable Sepolia ETH</span>
         <span>{formatEther(retrieveAmount(account))} ETH (testnet)</span>
       </Item>
       <ClaimButton onSuccess={handleSuccess} onError={handleError} />

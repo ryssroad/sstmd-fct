@@ -7,6 +7,7 @@ export const RoundedBox = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
   minWidth: theme.spacing(40),
   maxWidth: theme.spacing(70),
+  textAlign: 'center',
   width: "100%",
   ...theme.typography.body2
 }))

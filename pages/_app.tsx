@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app"
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material"
-import { Goerli, DAppProvider, Config } from "@usedapp/core"
+import { Sepolia, DAppProvider, Config } from "@usedapp/core"
 import Head from "next/head"
 import { OpenSourceMemo } from "../components/OpenSourceMemo"
 import { Header } from "../components/Header"
@@ -11,9 +11,9 @@ import { pollingInterval } from "../consts/env"
 import { CaptchaProvider } from "../components/CaptchaProvider"
 
 const config: Config = {
-  readOnlyChainId: Goerli.chainId,
+  readOnlyChainId: Sepolia.chainId,
   readOnlyUrls: {
-    [Goerli.chainId]: process.env.NEXT_PUBLIC_ETH_API_URL as string
+    [Sepolia.chainId]: process.env.NEXT_PUBLIC_ETH_API_URL as string
   },
   pollingInterval
 }
@@ -22,7 +22,7 @@ const theme = createTheme()
 const EthereumFaucet = ({ Component, pageProps }: AppProps) => (
   <>
     <Head>
-      <title>Claim Görli ETH</title>
+      <title>Claim Sepolia ETH</title>
     </Head>
     <CaptchaProvider>
       <DAppProvider config={config}>
